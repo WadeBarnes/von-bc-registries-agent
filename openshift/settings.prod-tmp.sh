@@ -8,7 +8,7 @@ export images="postgresql postgresql-oracle-fdw bcreg-x-agent mara schema-spy-wi
 # Danger, Danger, Will Robinson!
 # ----------------------------------------------
 # Override environments, since there is only one:
-# devex-bcgov-dac-dev
+# devex-bcgov-dap-dev
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export DEPLOYMENT_ENV_NAME="dev"
 export DEV="dev"
