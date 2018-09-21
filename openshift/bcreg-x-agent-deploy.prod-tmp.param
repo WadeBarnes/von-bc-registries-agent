@@ -1,0 +1,25 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: templates/bcreg-x-agent/bcreg-x-agent-deploy.json
+#=========================================================
+NAME=bcreg-x-agent
+IMAGE_NAMESPACE=devex-von-bc-registries-agent-tools
+TAG_NAME=prod-tmp
+APPLICATION_URL=
+CONFIG_ROOT=../config
+HOST_PORT=8080
+ENVIRONMENT=default
+ENABLE_GUNICORN=0
+INDY_LEDGER_URL=http://159.203.24.151
+FORMS=
+ISSUERS=
+LOG_LEVEL=
+PYTHON_ENV=development
+TOB_API_URL=https://django-devex-von-bc-tob-prod-tmp.pathfinder.gov.bc.ca/api/v2
+TOB_APP_URL=https://angular-on-nginx-devex-von-bc-tob-prod-tmp.pathfinder.gov.bc.ca
+WALLET_SEED_BCREG=bc_reg_agent_prod_tmp_0000000000
+CPU_LIMIT=0
+MEMORY_LIMIT=0Mi
+CPU_REQUEST=0
+MEMORY_REQUEST=0Mi

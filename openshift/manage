@@ -45,6 +45,13 @@ usage () {
       - Recycle one or more pods.
         For example;
           $0 -e dev recycle mara
+
+    deplyToProdTmp
+      - Deploy images to the prod-tmp environment.  Deploys images tagged for `test` by default. 
+        For examples;
+          $0 -p bc-tob-prod-tmp deplyToProdTmp
+          $0 -p bc-tob-prod-tmp deplyToProdTmp latest
+
 EOF
 exit 1
 }
@@ -123,6 +130,16 @@ resetDatabase() {
 
   echoWarning "\nThe ${_dbPodName} database has been deleted and recreated."
 }
+
+deplyToProdTmp() {
+  _fromTag=${1}
+  if [ -z "${_fromTag}" ]; then
+    echo -e \\n"deplyToProdTmp; Missing parameter!"\\n
+    exit 1
+  fi
+
+  tagProjectImages.sh -s "${_fromTag}" -t prod-tmp
+}
 # =================================================================================================================
 
 pushd ${SCRIPT_HOME} >/dev/null
@@ -146,6 +163,9 @@ case "${_cmd}" in
     ;;
   recycle)
     recyclePods ${@}
+    ;;
+  deplytoprodtmp)
+    deplyToProdTmp ${1:-test}
     ;;
   *)
     echoWarning "Unrecognized command; ${_cmd}"
