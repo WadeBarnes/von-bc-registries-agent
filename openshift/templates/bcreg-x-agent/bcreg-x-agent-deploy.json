@@ -237,7 +237,7 @@
       "name": "APPLICATION_URL",
       "displayName": "Application Url",
       "description": "The application URL.",
-      "required": true,
+      "required": false,
       "value": "https://bcreg-x-proxy-devex-von-bc-registries-agent-dev.pathfinder.gov.bc.ca/"
     },
     {
