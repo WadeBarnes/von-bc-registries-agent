@@ -10,14 +10,22 @@ def APP_NAMES = [
   'postgresql', 
   'mara', 
   'bcreg-x-agent',
-  'schema-spy-with-oracle-jdbc']
+  'schema-spy-with-oracle-jdbc',
+  'backup']
 
 node {
   properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10']]])
 
   APP_NAMES.each { appName ->
-    stage('Deploying ' + appName + ' to ' + DESTINATION_TAG) {
-      openshiftTag destStream: appName, verbose: 'true', destTag: DESTINATION_TAG, srcStream: appName, srcTag: SOURCE_TAG
+    stage("Deploying ${appName} to ${DESTINATION_TAG}") {
+      script {
+        openshift.withCluster() {
+          openshift.withProject() {
+            echo "Tagging ${appName} for deployment to ${DESTINATION_TAG} ..."
+            openshift.tag("${appName}:${SOURCE_TAG}", "${appName}:${DESTINATION_TAG}")
+          }
+        }
+      }
     }
   }
 }

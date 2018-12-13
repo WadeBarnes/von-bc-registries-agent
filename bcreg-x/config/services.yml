@@ -13,7 +13,7 @@ issuers:
 
     wallet:
       name: ${POSTGRESQL_WALLET_NAME:-bcreg_issuer}
-      seed: $WALLET_SEED_BCREG
+      seed: $INDY_WALLET_SEED
       type: $WALLET_TYPE
       params:
         storage_config:
@@ -29,7 +29,7 @@ issuers:
 
     credential_types:
       - description: Registration
-        schema: registration.bc_registries
+        schema: registration.registries.ca
         issuer_url: $APPLICATION_URL_INCORP
         credential:
           effective_date:
@@ -146,13 +146,24 @@ issuers:
               value:
                 input: home_jurisdiction
                 from: claim
+          - model: category
+            fields:
+              type:
+                input: reason_description
+                from: value
+              value:
+                input: reason_description
+                from: claim
 
       - description: Relationship
-        schema: relationship.bc_registries
+        schema: relationship.registries.ca
         issuer_url: $APPLICATION_URL_DBA
         credential:
           effective_date:
             input: effective_date
+            from: claim
+          revoked_date:
+            input: expiry_date
             from: claim
         topic:
           related_source_id:
@@ -205,13 +216,24 @@ issuers:
               value:
                 input: relationship_status_effective
                 from: claim
+          - model: category
+            fields:
+              type:
+                input: reason_description
+                from: value
+              value:
+                input: reason_description
+                from: claim
 
       - description: Corporate Address
-        schema: address.bc_registries
+        schema: address.registries.ca
         issuer_url: $APPLICATION_URL_ADDRESS
         credential:
           effective_date:
             input: effective_date
+            from: claim
+          revoked_date:
+            input: expiry_date
             from: claim
         topic:
           source_id:
@@ -245,4 +267,12 @@ issuers:
                 from: claim
               type:
                 input: address_type
+                from: claim
+          - model: category
+            fields:
+              type:
+                input: reason_description
+                from: value
+              value:
+                input: reason_description
                 from: claim
