@@ -7,6 +7,7 @@ from bcreg.bcregistries import BCRegistries, system_type
 from bcreg.rocketchat_hooks import log_error, log_warning, log_info
 
 MAX_CORPS = 10000
+CRAZY_MAX_CORPS = 100000
 
 try:
     with BCRegistries() as bc_registries:
@@ -26,8 +27,11 @@ try:
 
             # get unprocessed corps (there are about 2700)
             print("Get unprocessed corps")
-            last_event_dt = bc_registries.get_event_effective_date(prev_event_id)
-            max_event_dt = bc_registries.get_event_effective_date(max_event_id)
+            if prev_event_id == 0:
+                last_event_dt = datetime.datetime(datetime.MINYEAR, 1, 1)
+            else:
+                last_event_dt = prev_event_date # bc_registries.get_event_effective_date(prev_event_id)
+            max_event_dt = max_event_date # bc_registries.get_event_effective_date(max_event_id)
             corps = bc_registries.get_unprocessed_corps(prev_event_id, last_event_dt, max_event_id, max_event_dt)
             print("Unprocessed corps count is", len(corps))
 
@@ -47,7 +51,9 @@ try:
                 raise Exception('max event date unreasonable: {}'.format(max_event_dt))
 
             # reasonability test on the number of outstanding records
-            if MAX_CORPS < len(corps):
+            if CRAZY_MAX_CORPS < len(corps):
+                log_error("find-unpocessed-events More than cRaZy MaX corps: " + str(len(corps)))
+            elif MAX_CORPS < len(corps):
                 log_warning("find-unpocessed-events More than max corps: " + str(len(corps)))
 
             print("Update our queue")
