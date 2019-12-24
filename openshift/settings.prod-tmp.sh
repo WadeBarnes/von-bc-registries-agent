@@ -1,6 +1,8 @@
 export TOOLS="devex-von-bc-registries-agent-tools"
 export PROJECT_NAMESPACE="devex-bcgov-dap"
 
+export ignore_templates="backup-deploy"
+
 # Used for tmp deployment scripts
 export images="postgresql postgresql-oracle-fdw bcreg-x-agent mara schema-spy-with-oracle-jdbc"
 

@@ -20,7 +20,7 @@ SCHEMASPY_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
 IMAGE_NAMESPACE=devex-von-bc-registries-agent-tools
 SOURCE_IMAGE_NAME=schema-spy-with-oracle-jdbc
 TAG_NAME=prod-tmp
-APPLICATION_DOMAIN=schema-spy-oracle-devex-von-bc-registries-agent-prod.pathfinder.gov.bc.ca
+APPLICATION_DOMAIN=schema-spy-oracle-bc-reg-agent-prod-tmp.pathfinder.gov.bc.ca
 CONFIG_FILE_NAME=Caddyfile
 CONFIG_MAP_NAME=caddy-conf
 CONFIG_MOUNT_PATH=/etc/
